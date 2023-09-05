@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animate SVG</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+
+    
+</head>
+<body>
+    <section>
+
+    </section>
+    <section class="content">
+
+        <svg class="scene"  viewBox="0 0 1728 852" fill="none" preserveAspectRatio="xMidYMin slice">
+            <defs>
+                <filter id="displacementFilter">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="1" result="noise" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="50" xChannelSelector="R" yChannelSelector="G" />
+                </filter>
+                <mask id="circleMask" >
+                    <circle cx="600" cy="800" r="0" fill="white" class="displacement"  />
+                </mask>
+            </defs>
+            
+            <!-- <rect width="1728" height="851.376" fill="#90EA4A" width="100%" height="100%" mask="url(#circleMask)"/> -->
+                <image data-depth-x="-0.02" data-depth-y="-.04"  xlink:href="https://imagedelivery.net/qYe1HV76whNwIbFpIu0Kwg/6f9ca426-c71a-46ee-1be6-3aa14e4f1300/public" width="100%" height="100%" mask="url(#circleMask)" >
+        </svg>
+            
+        <ul>
+            <li>
+                <a href="#">
+                <span>Exemplo de Menu1</span>
+                <p class="date">Jan 2022</p>
+                <div class="border"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <span>Consultoria FLUIG</span>
+                <p class="date">Jan 2022</p>
+                <div class="border"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <span>Consultoria DATASUL</span>
+                <p class="date">Jan 2022</p>
+                <div class="border"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <span>Consultoria RM</span>
+                <p class="date">Jan 2022</p>
+                <div class="border"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <span>Consultoria BODY SHOP</span>
+                <p class="date">Jan 2022</p>
+                <div class="border"></div>
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="https://crmservices.com.br/assets/js/parallax.min.js"></script>
+
+    
+    <script>
+
+        var scene = document.querySelector('.scene');
+		var parallax = new Parallax(scene);  
+        
+        
+
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        let tl = gsap.timeline({
+            scrollTrigger:{
+                trigger: ".content",
+                start:"top top",
+                end: "bottom top",
+                scrub:1,
+                pin: true,
+                // anticipatePin: 1,
+                markers: true,
+                toggleActions:'play none none reverse'
+            
+
+            }
+        });
+
+        tl
+        .to('.displacement', {
+            attr: {
+                r: 700
+            },
+            duration: 2
+        })
+        .to('span, p', {
+            y:0,
+            stagger: 0.1
+        }, "-=2")
+
+        .to('.border', {
+            scaleX: 1,
+            stagger: .1
+        }, "-=2")
+
+
+
+        const lenis = new Lenis()
+
+            lenis.on('scroll', (e) => {
+            // console.log(e)
+            })
+
+            function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+            }
+
+            requestAnimationFrame(raf)
+    </script>
+    
+</body>
+</html>
